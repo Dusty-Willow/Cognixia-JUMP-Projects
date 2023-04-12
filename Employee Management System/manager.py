@@ -5,11 +5,12 @@ employees = []
 objectList = []
 newDict = {}
 
+# Methods used for fetching and then displaying list of employees from employees.json
 def collector(dict):
     global employees, details
     employees = dict.keys()
     for key in employees:
-        objectList.append(emp.Employee(dict[key]["Name"], dict[key]["Age"], dict[key]["Birth"], dict[key]["Email"]))
+        objectList.append(emp.Employee(dict[key]["First Name"], dict[key]["Last Name"], dict[key]["Age"], dict[key]["Birth"], dict[key]["Employee ID"], dict[key]["Employment Date"], dict[key]["Salary"], dict[key]["Department"], dict[key]["Email"]))
 
 def listEmployees():
     global objectList
@@ -32,6 +33,7 @@ def displayEmployeeList():
         # printDict()
     except:
         print("This file doesn't exist.")
+# Methods used for fetching and then displaying list of employees from employees.json
 
 
 displayEmployeeList()
