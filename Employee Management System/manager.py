@@ -59,4 +59,16 @@ def generateId():
 
     return str(employeeIdPlaceholder + 1)
 
+def remove_emp():
+    emp_id = input(f"Which employee i.d would you like to delete?: ") 
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
+    del data[emp_id]
+    with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+    
+    
+    
+            
+                   
 displayEmployeeList()
