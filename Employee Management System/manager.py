@@ -3,14 +3,17 @@ import employee as emp
 
 employees = []
 objectList = []
-newDict = {}
+employeeIdPlaceholder = None
 
 # Methods used for fetching and then displaying list of employees from employees.json
 def collector(dict):
-    global employees, details
+    global employees, employeeIdPlaceholder
     employees = dict.keys()
     for key in employees:
-        objectList.append(emp.Employee(dict[key]["First Name"], dict[key]["Last Name"], dict[key]["Age"], dict[key]["Birth"], dict[key]["Employee ID"], dict[key]["Employment Date"], dict[key]["Salary"], dict[key]["Department"], dict[key]["Email"]))
+        if (key == "0"):
+            employeeIdPlaceholder = dict[key]
+        else:
+            objectList.append(emp.Employee(dict[key]["First Name"], dict[key]["Last Name"], dict[key]["Age"], dict[key]["Birth"], dict[key]["Employee ID"], dict[key]["Employment Date"], dict[key]["Salary"], dict[key]["Department"], dict[key]["Email"]))
 
 def listEmployees():
     global objectList
@@ -29,10 +32,31 @@ def displayEmployeeList():
 
         collector(data)
         listEmployees()
+        generateId()
         # printDict()
     except:
         print("This file doesn't exist.")
 # Methods used for fetching and then displaying list of employees from employees.json
 
+def generateEmail(firstName, lastName, birth, id):
+    email = ""
+
+    return email
+
+def generateId():
+    global employeeIdPlaceholder
+
+    try:
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)   
+
+        data["0"] = employeeIdPlaceholder + 1
+
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+    except:
+        print("This file doesn't exist.")
+
+    return str(employeeIdPlaceholder + 1)
 
 displayEmployeeList()
