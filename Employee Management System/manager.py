@@ -75,7 +75,7 @@ def addEmployee():   #module adding a new employee record to the json file
         print("This file doesn't exist.")
 
 def generateEmail(first_name, last_name, dob, emp_id):
-    email = f"{first_name}.{last_name}{dob[-2:]}{id}@cognixia.com"
+    email = f"{first_name}.{last_name}{dob[-2:]}{emp_id}@cognixia.com"
     return email
 
 def generateId():
@@ -84,9 +84,15 @@ def generateId():
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
-
+        employeeIdPlaceholder = data["0"]
         data["0"] = employeeIdPlaceholder + 1
-    return str(employeeIdPlaceholder + 1)
+
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+    except:
+        print("This file doesn't exist.")
+
+    return employeeIdPlaceholder + 1
 
 # Method used for updating Employee data in employees.json
 def updateEmployeeAttribute(emp_id, attribute, value):
@@ -148,4 +154,4 @@ def removeEmployee():
     except:
         print("This file doesn't exist.")
 
-displayEmployeeList()
+updateEmployeeData(objectList, 2)
