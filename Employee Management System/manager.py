@@ -59,4 +59,18 @@ def generateId():
 
     return str(employeeIdPlaceholder + 1)
 
+def removeEmployee():
+    emp_id = input("Please enter the Employee ID for the employee you wish to remove.")
+    try:
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)   
+
+        del data[emp_id]
+
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+    except:
+        print("This file doesn't exist.")
+
 displayEmployeeList()
+removeEmployee()
