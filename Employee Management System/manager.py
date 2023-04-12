@@ -154,4 +154,4 @@ def removeEmployee():
     except:
         print("This file doesn't exist.")
 
-updateEmployeeData(objectList, 2)
+displayEmployeeList()
