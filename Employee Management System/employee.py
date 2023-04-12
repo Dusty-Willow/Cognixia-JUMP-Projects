@@ -14,7 +14,7 @@ class Employee:
     def toString(self):
         print(f"Employee Name: {self.firstName} {self.lastName}")
         print(f"Employee Age: {self.age}")
-        print(f"Employe Birth Date: {self.birth}")
+        print(f"Employee Birth Date: {self.birth}")
         print(f"Employee ID: {self.employeeId}")
         print(f"Employment Date: {self.employmentDate}")
         print(f"Department: {self.department}")

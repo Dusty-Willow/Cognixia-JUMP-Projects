@@ -15,8 +15,7 @@ def collector(dict):
 def listEmployees():
     global objectList
     empNum = 1
-    print("\n")
-    
+    print("\n")   
     for object in objectList:
         print(f"-----Employee Number {str(empNum)}-----\n")
         object.toString()
