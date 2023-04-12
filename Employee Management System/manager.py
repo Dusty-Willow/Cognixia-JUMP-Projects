@@ -1,5 +1,6 @@
 import json
 import employee as emp
+import _prompts as pr
 
 employees = []
 objectList = []
@@ -18,7 +19,7 @@ def collector(dict):
 def listEmployees():
     global objectList
     empNum = 1
-    print("\n")   
+    print("\n")
     for object in objectList:
         print(f"-----Employee Number {str(empNum)}-----\n")
         object.toString()
@@ -32,15 +33,46 @@ def displayEmployeeList():
 
         collector(data)
         listEmployees()
-        generateId()
+
         # printDict()
     except:
         print("This file doesn't exist.")
 # Methods used for fetching and then displaying list of employees from employees.json
 
-def generateEmail(firstName, lastName, birth, id):
-    email = ""
+def addEmployee():   #module adding a new employee record to the json file
+    first_name = pr.get_first_name()
+    last_name = pr.get_last_name()
+    age = pr.get_age()
+    dob = pr.get_dob()
+    emp_id = generateId()
+    emp_date = pr.get_emp_date()
+    department = pr.get_department()
+    salary = pr.get_salary()
+    email = generateEmail(first_name, last_name, dob, emp_id)
+    emp_info = {
+        "First Name": first_name.title(),
+        "Last Name": last_name.title(),
+        "Age": age,
+        "Birth": dob,
+        "Employee ID": emp_id,
+        "Employment Date": emp_date,
+        "Department": department.title(),
+        "Salary": salary,
+        "Email": email
+                }
+    try:
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)
+        data[emp_id] = emp_info
 
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+        # printDict()
+    except:
+        print("This file doesn't exist.")
+
+def generateEmail(first_name, last_name, dob, emp_id):
+    email = f"{first_name}.{last_name}{dob[-2:]}{id}@cognixia.com"
     return email
 
 def generateId():
@@ -48,7 +80,7 @@ def generateId():
 
     try:
         with open('employees.json', 'rt') as file:
-            data = json.load(file)   
+            data = json.load(file)
 
         data["0"] = employeeIdPlaceholder + 1
 
@@ -63,7 +95,7 @@ def removeEmployee():
     emp_id = input("Please enter the Employee ID for the employee you wish to remove.")
     try:
         with open('employees.json', 'rt') as file:
-            data = json.load(file)   
+            data = json.load(file)
 
         del data[emp_id]
 
@@ -73,4 +105,3 @@ def removeEmployee():
         print("This file doesn't exist.")
 
 displayEmployeeList()
-removeEmployee()
