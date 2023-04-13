@@ -18,7 +18,7 @@ while True:
 
     elif ID_type == system_lib[2]:
         #Adding employees
-        employee()
+        manager.addEmployee()
         ID_type = None
 
     elif ID_type == system_lib[3]:
