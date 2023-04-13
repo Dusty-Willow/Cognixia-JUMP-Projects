@@ -112,13 +112,13 @@ def updateEmail(emp_id):
 
 def updateEmployeeData():
     updateEmployee = True
-    employeePos = None
     employeeID = input("Please enter the Employee Id of the Employee you wish to update: ")
     try:
         with open('employees.json', 'rt') as file:
-                data = json.load(file)
+            data = json.load(file)
     except:
         exc.FileNotFound()
+    
     employeeFound = False
     for key, value in data.items():
         if (employeeID == key and employeeID != "0"):
@@ -161,10 +161,21 @@ def removeEmployee():
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
+    except:
+        exc.FileNotFound()
 
+    employeeFound = False
+    for key, value in data.items():
+        if (emp_id == key and emp_id != "0"):
+            employeeFound = True
+    
+    if (employeeFound):
         del data[emp_id]
+    else:
+        exc.EmployeeNotFound()
 
+    try:
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        print("This file doesn't exist.")
+        exc.FileNotFound()
