@@ -133,22 +133,22 @@ def updateEmployeeData():
         updateField = input(f"What would you like to update for this employee? ")
         match updateField.title():
             case "First Name":
-                updateEmployeeAttribute(employeeID, "First Name", input("Enter new First Name: "))
+                updateEmployeeAttribute(employeeID, "First Name", pr.get_first_name())
                 updateEmail(employeeID)
             case "Last Name":
-                updateEmployeeAttribute(employeeID, "Last Name", input("Enter new Last Name: "))
+                updateEmployeeAttribute(employeeID, "Last Name", pr.get_last_name())
                 updateEmail(employeeID)
             case "Age":
-                updateEmployeeAttribute(employeeID, "Age", int(input("Enter new Age: ")))
+                updateEmployeeAttribute(employeeID, "Age", int(pr.get_age()))
             case "Birth":
-                updateEmployeeAttribute(employeeID, "Birth", input("Enter new Birth Date: "))
+                updateEmployeeAttribute(employeeID, "Birth", pr.get_dob())
                 updateEmail(employeeID)
             case "Employment Date":
-                updateEmployeeAttribute(employeeID, "Employment Date", input("Enter new Employment Date: "))
+                updateEmployeeAttribute(employeeID, "Employment Date", pr.get_emp_date())
             case "Department":
-                updateEmployeeAttribute(employeeID, "Department", input("Enter new Department: "))
+                updateEmployeeAttribute(employeeID, "Department", pr.get_department())
             case "Salary":
-                updateEmployeeAttribute(employeeID, "Salary", input("Enter new Salary: "))
+                updateEmployeeAttribute(employeeID, "Salary", pr.get_salary())
             case _:
                 print("Invalid employee field choice. Please choose an appropriate field to update.")
 
