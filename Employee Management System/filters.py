@@ -21,6 +21,8 @@ def filterByName():
             currentEmployee.toString()
 
 def filterByAge():
+    data = initialize()
+    ageString = input("\nEnter age you wish to filter for: ").lower()
     pass
 
 
@@ -33,6 +35,8 @@ def filterByAge():
 
 
 def filterByBirth():
+    data = initialize()
+    birthString = input("\nEnter year of birth you wish to filter for: ").lower()
     pass
 
 
@@ -44,6 +48,8 @@ def filterByBirth():
 
 
 def filterByEmploymentDate():
+    data = initialize()
+    empDateString = input("\nEnter year of employment you wish to filter for: ").lower()
     pass
 
 
@@ -56,6 +62,8 @@ def filterByEmploymentDate():
 
 
 def filterByDepartment():
+    data = initialize()
+    depString = input("\nEnter department you wish to filter for: ").lower()
     pass
 
 
@@ -67,4 +75,7 @@ def filterByDepartment():
 
 
 def filterBySalary():
+    data = initialize()
+    minSalString = input("\nEnter minimum salary you wish to filter for: ").lower()
+    maxSalString = input("\nEnter maximum salary you wish to filter for: ").lower()
     pass
