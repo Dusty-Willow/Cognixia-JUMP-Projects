@@ -8,11 +8,8 @@ import filters as filter
 # Methods used for fetching and then displaying list of employees from employees.json
 def displayEmployeeList():
     # Loads employee details from relevant file
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
 
     for key, value in data.items():
         if (key != "0"):
@@ -45,19 +42,14 @@ def addEmployee():   #module adding a new employee record to the json file
             "Salary": salary,
             "Email": email
                     }
-        try:
-            with open('employees.json', 'rt') as file:
-                data = json.load(file)
-        except:
-            raise exc.FileNotFound()
+
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)
 
         data[emp_id] = emp_info
         
-        try:
-            with open('employees.json', 'w') as file:
-                json.dump(data, file, indent=4)
-        except:
-            raise exc.FileNotFound()
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
         
         print("\nEmployee Added!")
 
@@ -70,62 +62,45 @@ def generateEmail(first_name, last_name, dob, emp_id):
 def generateId():
     employeeIdPlaceholder = None
 
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
 
     employeeIdPlaceholder = data["0"]
     data["0"] = employeeIdPlaceholder + 1
 
-    try:
-        with open('employees.json', 'w') as file:
-            json.dump(data, file, indent=4)
-    except:
-        raise exc.FileNotFound()
+    with open('employees.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
     return employeeIdPlaceholder + 1
 
 # Method used for updating Employee data in employees.json
 def updateEmployeeAttribute(emp_id, attribute, value):
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
+    
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
 
     data[str(emp_id)][attribute] =  value
 
-    try:
-        with open('employees.json', 'w') as file:
-            json.dump(data, file, indent=4)
-    except:
-        raise exc.FileNotFound()
+    with open('employees.json', 'w') as file:
+        json.dump(data, file, indent=4)
+    
 
 def updateEmail(emp_id):
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
+    
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
 
     data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
 
-    try:
-        with open('employees.json', 'w') as file:
-            json.dump(data, file, indent=4)
-    except:
-        raise exc.FileNotFound()
+    with open('employees.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 def updateEmployeeData():
     updateEmployee = True
     employeeID = input("Please enter the Employee Id of the Employee you wish to update: ")
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
+
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
     
     employeeFound = False
     for key, value in data.items():
@@ -175,12 +150,10 @@ def removeEmployee():
     removeEmployee = True
     while removeEmployee:
         emp_id = input("Please enter the Employee ID for the employee you wish to remove: ")
-        try:
-            with open('employees.json', 'rt') as file:
-                data = json.load(file)
-        except:
-            raise exc.FileNotFound()
-
+        
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)
+        
         employeeFound = False
         for key, value in data.items():
             if (emp_id == key and emp_id != "0"):
@@ -211,12 +184,12 @@ def filterEmployee():
             case "Age":
                 filter.filterByAge()
             case "Birth":
-                pass
+                filter.filterByBirth()
             case "Employment Date":
                 filter.filterByEmploymentDate()
             case "Department":
                 filter.filterByDepartment()
             case "Salary":
-                pass
+                filter.filterBySalary()
 
         filterEmployee = pr.repeat_action()
