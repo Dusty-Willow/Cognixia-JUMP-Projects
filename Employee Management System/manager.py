@@ -8,38 +8,21 @@ objectList = []
 employeeIdPlaceholder = None
 
 # Methods used for fetching and then displaying list of employees from employees.json
-def collector(dict):
-    global employees, employeeIdPlaceholder
-    employees = dict.keys()
-    for key in employees:
-        if (key == "0"):
-            employeeIdPlaceholder = dict[key]
-        else:
-            objectList.append(emp.Employee(dict[key]["First Name"], dict[key]["Last Name"], dict[key]["Age"], dict[key]["Birth"], dict[key]["Employee ID"], dict[key]["Employment Date"], dict[key]["Salary"], dict[key]["Department"], dict[key]["Email"]))
-
-def listEmployees():
-    global objectList
-    empNum = 1
-    print("\n")
-    for object in objectList:
-        print(f"-----Employee Number {str(empNum)}-----\n")
-        object.toString()
-        empNum += 1
-
 def displayEmployeeList():
     # Loads employee details from relevant file
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
 
-        collector(data)
-        listEmployees()
-
-        # printDict()
+        for key, value in data.items():
+            if (key != "0"):
+                print(f"-----Employee Number {key}-----\n")
+                currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+                currentEmployee.toString()
     except:
         print("This file doesn't exist.")
 
-    listEmployees()
+    # listEmployees()
 # Methods used for fetching and then displaying list of employees from employees.json
 
 def addEmployee():   #module adding a new employee record to the json file
@@ -107,27 +90,48 @@ def updateEmployeeAttribute(emp_id, attribute, value):
     except:
         print("This file doesn't exist.")
 
-def updateEmployeeData(objectList, employeeID):
+def updateEmail(emp_id):
+    try:
+        with open('employees.json', 'rt') as file:
+            data = json.load(file)
+
+        data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
+
+        with open('employees.json', 'w') as file:
+            json.dump(data, file, indent=4)
+    except:
+        print("This file doesn't exist.")
+
+def updateEmployeeData():
     updateEmployee = True
     employeePos = None
-    for employee in objectList:
-        try:
-            if employee.employeeId == employeeID:
-                employeePos = objectList.index(employee)
-        except exc.EmployeeNotFound as e:
-            e.printError()
+    employeeID = input("Please enter the Employee Id of the Employee you wish to update: ")
+    with open('employees.json', 'rt') as file:
+            data = json.load(file)
+    employeeFound = False
+    for key, value in data.items():
+        if (employeeID == key and employeeID != "0"):
+            employeeFound = True
+
+    if (employeeFound == False):
+        print("\nThis Employee does not exist in the database.")
+        updateEmployee = False
 
     while updateEmployee:
-        updateField = input(f"What would you like to update for this employee?")
+        print(f"You may update the following:\n1 First Name \n2 Last Name\n3 Age\n4 Birth\n5 Employment Date\n6 Department\n7 Salary\n")
+        updateField = input(f"What would you like to update for this employee? ")
         match updateField.title():
             case "First Name":
                 updateEmployeeAttribute(employeeID, "First Name", input("Enter new First Name: "))
+                updateEmail(employeeID)
             case "Last Name":
                 updateEmployeeAttribute(employeeID, "Last Name", input("Enter new Last Name: "))
+                updateEmail(employeeID)
             case "Age":
                 updateEmployeeAttribute(employeeID, "Age", input("Enter new Age: "))
             case "Birth":
                 updateEmployeeAttribute(employeeID, "Birth", input("Enter new Birth Date: "))
+                updateEmail(employeeID)
             case "Employment Date":
                 updateEmployeeAttribute(employeeID, "Employment Date", input("Enter new Employment Date: "))
             case "Department":
@@ -153,5 +157,3 @@ def removeEmployee():
             json.dump(data, file, indent=4)
     except:
         print("This file doesn't exist.")
-
-displayEmployeeList()
