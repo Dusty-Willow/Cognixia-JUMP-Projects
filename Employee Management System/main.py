@@ -9,7 +9,7 @@ system_lib = {
 
 while True:
     print(f"-----------------------------\nSystem Commands:\n1: {system_lib[1]}\n2: {system_lib[2]}\n3: {system_lib[3]}\n4: {system_lib[4]}\n5: Exit\n")
-    ID_type = input("\nWhat would you like to Access? Input system ID, or type 'exit' to exit:\t").title()
+    ID_type = input("\nWhat would you like to Access? Input system command, or type 'exit' to exit:\t").title()
 
     if ID_type == system_lib[1]:
        #Displaying list of current employees
