@@ -5,9 +5,9 @@ def get_first_name():
             if all(x.isalpha() for x in first_name) and len(first_name) >= 3:
                 return first_name
             else:
-                print("Error: Invalid input")
+                print("Error: Name must only use characters between A-Z and be at least 3 characters.")
         except Exception:
-            print("Error: Invalid input")
+            print("Error: Name must only use characters between A-Z and be at least 3 characters.")
 
 
 def get_last_name():
@@ -17,17 +17,22 @@ def get_last_name():
             if all(x.isalpha() for x in last_name) and len(last_name) >= 3:
                 return last_name
             else:
-                print("Error: Invalid input")
+                print(
+                    "Error: Name must only include characters between A-Z and be at least 3 characters long.")
         except Exception:
-            print("Error: Invalid input")
+            print("Error: Name must only include characters between A-Z and be at least 3 characters long.")
 
 
 def get_age():
     while True:
         try:
-            return int(input("Enter Employee Age: "))
-        except Exception:
-            print("Error: Invalid input")
+            age = int(input("Enter Employee Age: "))
+            if age > 0:
+                return age
+            else:
+                print("Error: Age must be greater than 0.")
+        except ValueError:
+            print("Error: Age must be a number.")
 
 
 def get_dob():
@@ -37,9 +42,9 @@ def get_dob():
             if len(dob) == 10 and dob[2] == "-" and dob[5] == "-" and dob[:2].isdigit() and dob[3:5].isdigit() and dob[6:].isdigit():
                 return dob
             else:
-                print("Error: Invalid input")
+                print("Error: Date must be digits in DD-MM-YYY format.")
         except Exception:
-            print("Error: Invalid input")
+            print("Error: Date must be digits in DD-MM-YYY format.")
 
 
 def get_emp_date():
@@ -50,9 +55,9 @@ def get_emp_date():
             if len(emp_date) == 10 and emp_date[2] == "-" and emp_date[5] == "-" and emp_date[:2].isdigit() and emp_date[3:5].isdigit() and emp_date[6:].isdigit():
                 return emp_date
             else:
-                print("Error: Invalid input")
+                print("Error: Date must be digits in DD-MM-YYY format.")
         except Exception:
-            print("Error: Invalid input")
+            print("Error: Date must be digits in DD-MM-YYY format.")
 
 
 def get_department():
@@ -62,25 +67,20 @@ def get_department():
             if all(x.isalpha() or x.isspace() for x in department) and len(department) >= 3:
                 return department
             else:
-                print("Error: Invalid input")
+                print(
+                    "Error: Department name must only include characters between A-Z and be at least 3 characters long.")
         except Exception:
-            print("Error: Invalid input")
+            print("Error: Department name must only include characters between A-Z and be at least 3 characters long.")
 
 
 def get_salary():
     while True:
         try:
-            return input("Enter Employee Salary: ")
-        except Exception:
-            print("Error: Invalid input")
+            salary = int(input("Enter Employee Salary: "))
+            if salary < 0:
+                print("Error: Salary must be a positive number.")
+            else:
+                return salary
+        except ValueError:
+            print("Error: Salary must be a number.")
 
-
-"""def get_employee_details():
-    first_name = get_first_name()
-    last_name = get_last_name()
-    age = get_age()
-    dob = get_dob()
-    emp_date = get_emp_date()
-    department = get_department()
-    salary = get_salary()
-    return (first_name, last_name, age, dob, emp_date, department, salary)"""
