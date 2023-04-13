@@ -84,3 +84,19 @@ def get_salary():
         except ValueError:
             print("Error: Salary must be a number.")
 
+def repeat_action():
+    while True:
+        try:
+            repeat = input("\nWould you like to continue with this command? Enter Y/N: ").upper()
+            if (repeat == "Y" or repeat == "N"):
+                if (repeat == "N"):
+                    return False
+                else:
+                    return True
+            else:
+                print("Error: Invalid Entry. Please enter Y/N.")
+        except:
+            print("Error: Undefined Error.")
+
+
+

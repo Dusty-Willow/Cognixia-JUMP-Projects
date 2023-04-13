@@ -2,6 +2,7 @@ import json
 import employee as emp
 import _prompts as pr
 import exceptions as exc
+import filters as filter
 
 
 # Methods used for fetching and then displaying list of employees from employees.json
@@ -21,39 +22,46 @@ def displayEmployeeList():
 
 
 def addEmployee():   #module adding a new employee record to the json file
-    first_name = pr.get_first_name()
-    last_name = pr.get_last_name()
-    age = pr.get_age()
-    dob = pr.get_dob()
-    emp_id = generateId()
-    emp_date = pr.get_emp_date()
-    department = pr.get_department()
-    salary = pr.get_salary()
-    email = generateEmail(first_name, last_name, dob, emp_id)
-    emp_info = {
-        "First Name": first_name.title(),
-        "Last Name": last_name.title(),
-        "Age": age,
-        "Birth": dob,
-        "Employee ID": emp_id,
-        "Employment Date": emp_date,
-        "Department": department.title(),
-        "Salary": salary,
-        "Email": email
-                }
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
-
-    data[emp_id] = emp_info
     
-    try:
-        with open('employees.json', 'w') as file:
-            json.dump(data, file, indent=4)
-    except:
-        raise exc.FileNotFound()
+    addEmployee = True
+    while addEmployee:
+        first_name = pr.get_first_name()
+        last_name = pr.get_last_name()
+        age = pr.get_age()
+        dob = pr.get_dob()
+        emp_id = generateId()
+        emp_date = pr.get_emp_date()
+        department = pr.get_department()
+        salary = pr.get_salary()
+        email = generateEmail(first_name, last_name, dob, emp_id)
+        emp_info = {
+            "First Name": first_name.title(),
+            "Last Name": last_name.title(),
+            "Age": age,
+            "Birth": dob,
+            "Employee ID": emp_id,
+            "Employment Date": emp_date,
+            "Department": department.title(),
+            "Salary": salary,
+            "Email": email
+                    }
+        try:
+            with open('employees.json', 'rt') as file:
+                data = json.load(file)
+        except:
+            raise exc.FileNotFound()
+
+        data[emp_id] = emp_info
+        
+        try:
+            with open('employees.json', 'w') as file:
+                json.dump(data, file, indent=4)
+        except:
+            raise exc.FileNotFound()
+        
+        print("\nEmployee Added!")
+
+        addEmployee = pr.repeat_action()
 
 def generateEmail(first_name, last_name, dob, emp_id):
     email = f"{first_name}.{last_name}{dob[-2:]}{emp_id}@cognixia.com"
@@ -135,47 +143,80 @@ def updateEmployeeData():
             case "First Name":
                 updateEmployeeAttribute(employeeID, "First Name", pr.get_first_name())
                 updateEmail(employeeID)
+                print("\nEmployee First Name Updated!")
             case "Last Name":
                 updateEmployeeAttribute(employeeID, "Last Name", pr.get_last_name())
                 updateEmail(employeeID)
+                print("\nEmployee Last Name Updated!")
             case "Age":
                 updateEmployeeAttribute(employeeID, "Age", int(pr.get_age()))
+                print("\nEmployee Age Updated!")
             case "Birth":
                 updateEmployeeAttribute(employeeID, "Birth", pr.get_dob())
                 updateEmail(employeeID)
+                print("\nEmployee Date of Birth Updated!")
             case "Employment Date":
                 updateEmployeeAttribute(employeeID, "Employment Date", pr.get_emp_date())
+                print("\nEmployee Employment Date Updated!")
             case "Department":
                 updateEmployeeAttribute(employeeID, "Department", pr.get_department())
+                print("\nEmployee Department Updated!")
             case "Salary":
                 updateEmployeeAttribute(employeeID, "Salary", str(pr.get_salary()))
+                print("\nEmployee Salary Updated!")
             case _:
                 print("Invalid employee field choice. Please choose an appropriate field to update.")
 
-        if (input("Would you like to update anything else? Enter Y/N: ").upper() == "N"):
-            updateEmployee = False
+        updateEmployee = pr.repeat_action()
 
 
 def removeEmployee():
-    emp_id = input("Please enter the Employee ID for the employee you wish to remove.")
-    try:
-        with open('employees.json', 'rt') as file:
-            data = json.load(file)
-    except:
-        raise exc.FileNotFound()
-
-    employeeFound = False
-    for key, value in data.items():
-        if (emp_id == key and emp_id != "0"):
-            employeeFound = True
     
-    if (employeeFound):
-        del data[emp_id]
-    else:
-        exc.EmployeeNotFound()
+    removeEmployee = True
+    while removeEmployee:
+        emp_id = input("Please enter the Employee ID for the employee you wish to remove: ")
+        try:
+            with open('employees.json', 'rt') as file:
+                data = json.load(file)
+        except:
+            raise exc.FileNotFound()
 
-    try:
-        with open('employees.json', 'w') as file:
-            json.dump(data, file, indent=4)
-    except:
-        raise exc.FileNotFound()
+        employeeFound = False
+        for key, value in data.items():
+            if (emp_id == key and emp_id != "0"):
+                employeeFound = True
+        
+        if (employeeFound):
+            del data[emp_id]
+        else:
+            exc.EmployeeNotFound()
+
+        try:
+            with open('employees.json', 'w') as file:
+                json.dump(data, file, indent=4)
+        except:
+            raise exc.FileNotFound()
+        
+        print("\nEmployee Removed!")
+        removeEmployee = pr.repeat_action()
+
+def filterEmployee():
+    filterEmployee = True
+    while filterEmployee:
+        print(f"You may filter Employees in the following ways:\n1 Name \n2 Age\n3 Birth\n4 Employment Date\n5 Department\n6 Salary\n")
+        filterType = input(f"How would you like to filter Employees: ")
+        match filterType.title():
+            case "Name":
+                filter.filterByName()
+            case "Age":
+                pass
+            case "Birth":
+                pass
+            case "Employment Date":
+                pass
+            case "Department":
+                pass
+            case "Salary":
+                pass
+
+        filterEmployee = pr.repeat_action()
