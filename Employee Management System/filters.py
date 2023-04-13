@@ -61,7 +61,6 @@ def filterByBirth():
 
 def filterByEmploymentDate():
     data = initialize()
-<<<<<<< HEAD
     empDateString = pr.start_year_filter()
     for key, value in data.items():
         if (key != "0" and ((str(empDateString) in value["Employment Date"]))):
@@ -72,11 +71,6 @@ def filterByEmploymentDate():
 
 
 
-
-=======
-    empDateString = input("\nEnter year of employment you wish to filter for: ").lower()
-    pass
->>>>>>> 88be3508546788a72df03059ee1353f82f623d26
 
 
 def filterByDepartment():
