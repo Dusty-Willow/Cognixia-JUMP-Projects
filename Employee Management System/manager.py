@@ -176,20 +176,24 @@ def removeEmployee():
 def filterEmployee():
     filterEmployee = True
     while filterEmployee:
-        print(f"You may filter Employees in the following ways:\n1 Name \n2 Age\n3 Birth (By Year)\n4 Employment Date (By Year)\n5 Department\n6 Salary\n")
+        print(f"You may filter Employees in the following ways:\n1: Name \n2: Age\n3: Birth (By Year)\n4: Employment Date (By Year)\n5: Department\n6: Salary\n7: Exit")
         filterType = input(f"How would you like to filter Employees: ")
         match filterType.title():
-            case "Name":
+            case "Name" | "1":
                 filter.filterByName()
-            case "Age":
+            case "Age" | "2":
                 filter.filterByAge()
-            case "Birth":
+            case "Birth" | "3":
                 filter.filterByBirth()
-            case "Employment Date":
+            case "Employment Date" | "4":
                 filter.filterByEmploymentDate()
-            case "Department":
+            case "Department" | "5":
                 filter.filterByDepartment()
-            case "Salary":
+            case "Salary" | "6":
                 filter.filterBySalary()
+            case "Exit" | "7":
+                break
+            case _:
+                print("Invalid employee field choice. Please choose an appropriate field to update.")
 
         filterEmployee = pr.repeat_action()
