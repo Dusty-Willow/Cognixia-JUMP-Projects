@@ -213,7 +213,7 @@ def filterEmployee():
             case "Birth":
                 pass
             case "Employment Date":
-                pass
+                filter.filterByEmploymentDate()
             case "Department":
                 pass
             case "Salary":

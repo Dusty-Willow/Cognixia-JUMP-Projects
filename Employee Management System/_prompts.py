@@ -98,5 +98,15 @@ def repeat_action():
         except:
             print("Error: Undefined Error.")
 
-
+def start_year_filter():
+    while True:
+        try:
+            empDateString = int(input("Enter employee start year: "))
+            if (empDateString < 0) and (empDateString.isnumeric()):               
+                print("Error: Employee start year is invalid.")
+            else:
+                str(empDateString)
+                return empDateString
+        except ValueError:
+            print("Error: Start year must be a number.")
 
