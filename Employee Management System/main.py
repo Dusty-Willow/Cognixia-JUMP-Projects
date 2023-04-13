@@ -3,11 +3,12 @@ system_lib = {
     1: "Display",
     2: "Add",
     3: "Update",
-    4: "Remove"
+    4: "Remove",
+    5: "Filter"
 }
 
 while True:
-    print(f"-----------------------------\nSystem Commands:\n1: {system_lib[1]}\n2: {system_lib[2]}\n3: {system_lib[3]}\n4: {system_lib[4]}\n5: Exit\n")
+    print(f"-----------------------------\nSystem Commands:\n1: {system_lib[1]}\n2: {system_lib[2]}\n3: {system_lib[3]}\n4: {system_lib[4]}\n5: {system_lib[5]}\n6: Exit\n")
     ID_type = input("\nWhat would you like to Access? Input system command, or type 'exit' to exit: ").title()
 
     if ID_type == system_lib[1]:
@@ -28,6 +29,11 @@ while True:
     elif ID_type == system_lib[4]:
         #Remove method
         manager.removeEmployee()
+        ID_type = None
+
+    elif ID_type == system_lib[5]:
+        # Filter method
+        manager.filterEmployee()
         ID_type = None
 
     elif ID_type == 'Exit':

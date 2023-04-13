@@ -2,6 +2,7 @@ import json
 import employee as emp
 import _prompts as pr
 import exceptions as exc
+import filters as filter
 
 
 # Methods used for fetching and then displaying list of employees from employees.json
@@ -198,3 +199,24 @@ def removeEmployee():
         
         print("\nEmployee Removed!")
         removeEmployee = pr.repeat_action()
+
+def filterEmployee():
+    filterEmployee = True
+    while filterEmployee:
+        print(f"You may filter Employees in the following ways:\n1 Name \n2 Age\n3 Birth\n4 Employment Date\n5 Department\n6 Salary\n")
+        filterType = input(f"How would you like to filter Employees: ")
+        match filterType.title():
+            case "Name":
+                filter.filterByName()
+            case "Age":
+                pass
+            case "Birth":
+                pass
+            case "Employment Date":
+                pass
+            case "Department":
+                pass
+            case "Salary":
+                pass
+
+        filterEmployee = pr.repeat_action()

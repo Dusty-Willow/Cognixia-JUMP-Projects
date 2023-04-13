@@ -87,7 +87,7 @@ def get_salary():
 def repeat_action():
     while True:
         try:
-            repeat = input("\nWould you like to remove another Employee? Enter Y/N: ").upper()
+            repeat = input("\nWould you like to continue with this command? Enter Y/N: ").upper()
             if (repeat == "Y" or repeat == "N"):
                 if (repeat == "N"):
                     return False
