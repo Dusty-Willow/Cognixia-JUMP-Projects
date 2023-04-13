@@ -1,5 +1,5 @@
 {
-    "0": 4,
+    "0": 5,
     "1": {
         "First Name": "Arthur",
         "Last Name": "Pendragon",
@@ -21,27 +21,5 @@
         "Department": "Security Services",
         "Salary": "55000",
         "Email": "monkey.luffy942@strawhats.com"
-    },
-    "3": {
-        "First Name": "Oliver",
-        "Last Name": "Garden",
-        "Age": 24,
-        "Birth": "15-11-1998",
-        "Employee ID": 3,
-        "Employment Date": "25-02-2000",
-        "Department": "Janitorial Services",
-        "Salary": "40000",
-        "Email": "oliver.stone983@olivegarden.com"
-    },
-    "4": {
-        "First Name": "Susan",
-        "Last Name": "Storm",
-        "Age": 30,
-        "Birth": "12-05-1993",
-        "Employee ID": 4,
-        "Employment Date": "10-07-2000",
-        "Department": "Engineering Services",
-        "Salary": "80000",
-        "Email": "susan.storm934@fanfour.com"
     }
 }
