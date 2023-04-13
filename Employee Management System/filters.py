@@ -13,6 +13,7 @@ def initialize():
     return data
 
 
+# Name filter by Adeel
 def filterByName():
     entryFound = False
     data = initialize()
@@ -27,6 +28,7 @@ def filterByName():
     if not entryFound:
         print("\nNo entries matching filter settings found!")
 
+# Age filter by Serge
 def filterByAge():
     entryFound = False
     data = initialize()
@@ -42,6 +44,7 @@ def filterByAge():
         print("\nNo entries matching filter settings found!")
 
 
+# Birth filter by David
 def filterByBirth():
     entryFound = False
     data = initialize()
@@ -57,6 +60,7 @@ def filterByBirth():
         print("\nNo entries matching filter settings found!")
 
 
+# Employment Date filter by Cody
 def filterByEmploymentDate():
     entryFound = False
     data = initialize()
@@ -72,6 +76,7 @@ def filterByEmploymentDate():
         print("\nNo entries matching filter settings found!")
 
 
+# Department filter by Serge
 def filterByDepartment():
     entryFound = False
     data = initialize()
@@ -87,6 +92,7 @@ def filterByDepartment():
         print("\nNo entries matching filter settings found!")
 
 
+# Salary filter by Senthu
 def filterBySalary():
     entryFound = False
     data = initialize()
@@ -94,7 +100,7 @@ def filterBySalary():
     maxSalary = int(pr.filterPrompt("Max Salary"))
     for key, value in data.items():
         if (key != "0" and ((minSalary <= int(value["Salary"])) and (maxSalary >= int(value["Salary"])))):
-            print(f"Employee Number {key}: \n")
+            print(f"-----Employee Number {key}-----\n")
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
             entryFound = True

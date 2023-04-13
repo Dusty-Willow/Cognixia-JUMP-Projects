@@ -5,7 +5,7 @@ import exceptions as exc
 import filters as filter
 
 
-# Methods used for fetching and then displaying list of employees from employees.json
+# Method used for fetching and then displaying list of employees from employees.json by Adeel
 def displayEmployeeList():
     # Loads employee details from relevant file
     with open('employees.json', 'rt') as file:
@@ -18,7 +18,8 @@ def displayEmployeeList():
             currentEmployee.toString()
 
 
-def addEmployee():   #module adding a new employee record to the json file
+# Method used for adding employee to employees.json by Cody
+def addEmployee():   
     
     addEmployee = True
     while addEmployee:
@@ -39,7 +40,7 @@ def addEmployee():   #module adding a new employee record to the json file
             "Employee ID": emp_id,
             "Employment Date": emp_date,
             "Department": department.title(),
-            "Salary": salary,
+            "Salary": str(salary),
             "Email": email
                     }
 
@@ -55,10 +56,12 @@ def addEmployee():   #module adding a new employee record to the json file
 
         addEmployee = pr.repeat_action()
 
+# Method used for generating unique email based on employee name, date of birth and id by Cody
 def generateEmail(first_name, last_name, dob, emp_id):
     email = f"{first_name}.{last_name}{dob[-2:]}{emp_id}@cognixia.com"
     return email
 
+# Method used for generating unique employee id by reference of employees.json by Adeel
 def generateId():
     employeeIdPlaceholder = None
 
@@ -73,7 +76,7 @@ def generateId():
 
     return employeeIdPlaceholder + 1
 
-# Method used for updating Employee data in employees.json
+# Method used for updating Employee data in employees.json by Adeel
 def updateEmployeeAttribute(emp_id, attribute, value):
     
     with open('employees.json', 'rt') as file:
@@ -84,7 +87,7 @@ def updateEmployeeAttribute(emp_id, attribute, value):
     with open('employees.json', 'w') as file:
         json.dump(data, file, indent=4)
     
-
+# Method used for updating Employee email in employees.json when employee name or date of birth is changed by Adeel
 def updateEmail(emp_id):
     
     with open('employees.json', 'rt') as file:
@@ -95,6 +98,7 @@ def updateEmail(emp_id):
     with open('employees.json', 'w') as file:
         json.dump(data, file, indent=4)
 
+# Method used for updating employee data
 def updateEmployeeData():
     updateEmployee = True
     employeeID = input("Please enter the Employee Id of the Employee you wish to update: ")
@@ -145,8 +149,8 @@ def updateEmployeeData():
         updateEmployee = pr.repeat_action()
 
 
-def removeEmployee():
-    
+# Method used for removing employees from employees.json by Senthu
+def removeEmployee():    
     removeEmployee = True
     while removeEmployee:
         emp_id = input("Please enter the Employee ID for the employee you wish to remove: ")
@@ -173,6 +177,8 @@ def removeEmployee():
         print("\nEmployee Removed!")
         removeEmployee = pr.repeat_action()
 
+
+# Method used for filtering employees and displaying them by using functions in filters.py by Adeel
 def filterEmployee():
     filterEmployee = True
     while filterEmployee:

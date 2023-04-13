@@ -1,3 +1,4 @@
+# Prompts here by Serge
 def get_first_name():
     while True:
         try:
@@ -84,6 +85,8 @@ def get_salary():
         except ValueError:
             print("Error: Salary must be a number.")
 
+
+# Prompts from here by Adeel
 def repeat_action():
     while True:
         try:
