@@ -25,6 +25,17 @@ def filterByAge():
     ageString = input("\nEnter age you wish to filter for: ").lower()
     pass
 
+def filterBySalary():
+    data = initialize()
+    minSalary = int(input("\nEnter a  minimum salary  you wish to filter for: "))
+    maxSalary = int(input("\nEnter a  maximum salary  you wish to filter for: "))
+    for key, value in data.items():
+        if (key != "0" and ((minSalary <= int(value["Salary"])) and (maxSalary >= int(value["Salary"])))):
+            print(f"Employee Number {key} has a salary of: \n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
+
+filterBySalary()
 
 
 
