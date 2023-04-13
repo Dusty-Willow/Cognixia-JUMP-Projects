@@ -1,4 +1,7 @@
 import manager
+import exceptions as exceptions
+import json
+
 system_lib = {
     1: "Display",
     2: "Add",
@@ -6,6 +9,12 @@ system_lib = {
     4: "Remove",
     5: "Filter"
 }
+
+try:
+    with open('employees.json', 'rt') as file:
+        data = json.load(file)
+except:
+    raise exceptions.FileNotFound()
 
 while True:
     print(f"-----------------------------\nSystem Commands:\n1: {system_lib[1]}\n2: {system_lib[2]}\n3: {system_lib[3]}\n4: {system_lib[4]}\n5: {system_lib[5]}\n6: Exit\n")
