@@ -87,3 +87,4 @@ def filterBySalary():
     minSalString = input("\nEnter minimum salary you wish to filter for: ").lower()
     maxSalString = input("\nEnter maximum salary you wish to filter for: ").lower()
     pass
+
