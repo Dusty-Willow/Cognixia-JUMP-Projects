@@ -1,4 +1,3 @@
-import employee
 import manager
 system_lib = {
     1: "Display",
