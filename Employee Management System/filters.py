@@ -20,3 +20,51 @@ def filterByName():
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
 
+def filterByAge():
+    pass
+
+
+
+
+
+
+
+
+
+
+def filterByBirth():
+    pass
+
+
+
+
+
+
+
+
+
+def filterByEmploymentDate():
+    pass
+
+
+
+
+
+
+
+
+
+
+def filterByDepartment():
+    pass
+
+
+
+
+
+
+
+
+
+def filterBySalary():
+    pass

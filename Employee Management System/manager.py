@@ -203,7 +203,7 @@ def removeEmployee():
 def filterEmployee():
     filterEmployee = True
     while filterEmployee:
-        print(f"You may filter Employees in the following ways:\n1 Name \n2 Age\n3 Birth\n4 Employment Date\n5 Department\n6 Salary\n")
+        print(f"You may filter Employees in the following ways:\n1 Name \n2 Age\n3 Birth (By Year)\n4 Employment Date (By Year)\n5 Department\n6 Salary\n")
         filterType = input(f"How would you like to filter Employees: ")
         match filterType.title():
             case "Name":
