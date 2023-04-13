@@ -11,7 +11,7 @@ def displayEmployeeList():
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     for key, value in data.items():
         if (key != "0"):
@@ -45,7 +45,7 @@ def addEmployee():   #module adding a new employee record to the json file
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     data[emp_id] = emp_info
     
@@ -53,7 +53,7 @@ def addEmployee():   #module adding a new employee record to the json file
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
 def generateEmail(first_name, last_name, dob, emp_id):
     email = f"{first_name}.{last_name}{dob[-2:]}{emp_id}@cognixia.com"
@@ -66,7 +66,7 @@ def generateId():
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     employeeIdPlaceholder = data["0"]
     data["0"] = employeeIdPlaceholder + 1
@@ -75,7 +75,7 @@ def generateId():
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     return employeeIdPlaceholder + 1
 
@@ -85,7 +85,7 @@ def updateEmployeeAttribute(emp_id, attribute, value):
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     data[str(emp_id)][attribute] =  value
 
@@ -93,14 +93,14 @@ def updateEmployeeAttribute(emp_id, attribute, value):
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
 def updateEmail(emp_id):
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
 
@@ -108,7 +108,7 @@ def updateEmail(emp_id):
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
 def updateEmployeeData():
     updateEmployee = True
@@ -117,7 +117,7 @@ def updateEmployeeData():
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
     
     employeeFound = False
     for key, value in data.items():
@@ -162,7 +162,7 @@ def removeEmployee():
         with open('employees.json', 'rt') as file:
             data = json.load(file)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()
 
     employeeFound = False
     for key, value in data.items():
@@ -178,4 +178,4 @@ def removeEmployee():
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        exc.FileNotFound()
+        raise exc.FileNotFound()

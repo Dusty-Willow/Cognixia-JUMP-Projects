@@ -31,4 +31,7 @@ while True:
         ID_type = None
 
     elif ID_type == 'Exit':
-        break   
+        break
+
+    else:
+        print("Invalid Command.")   
