@@ -12,99 +12,92 @@ def initialize():
 
     return data
 
+
 def filterByName():
+    entryFound = False
     data = initialize()
-    nameString = input("\nEnter name you wish to filter for: ").lower()
+    nameString = pr.filterPrompt("Name")
     for key, value in data.items():
         if (key != "0" and ((nameString in value["First Name"].lower()) or (nameString in value["Last Name"].lower()))):
             print(f"-----Employee Number {key}-----\n")
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
+            entryFound = True
 
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
 
 def filterByAge():
+    entryFound = False
     data = initialize()
-    while True:
-        age = input("\nEnter age you wish to filter for: ")
-        if age.isdigit() and int(age) >= 0:
-            age = int(age)
-            break
-        else:
-            print("Please enter a number.")
+    age = pr.filterPrompt("Age")
     for key, value in data.items():
-        if (key != "0" and value["Age"] == age):
+        if (key != "0" and value["Age"] == int(age)):
             print(f"-----Employee Number {key}-----\n")
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
+            entryFound = True
 
-def filterBySalary():
-    data = initialize()
-    minSalary = int(input("\nEnter a  minimum salary  you wish to filter for: "))
-    maxSalary = int(input("\nEnter a  maximum salary  you wish to filter for: "))
-    for key, value in data.items():
-        if (key != "0" and ((minSalary <= int(value["Salary"])) and (maxSalary >= int(value["Salary"])))):
-            print(f"Employee Number {key} has a salary of: \n")
-            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
-            currentEmployee.toString()
-
-filterBySalary()
-
-
-
-
-
-
-
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
 
 
 def filterByBirth():
+    entryFound = False
     data = initialize()
-    birthString = input("\nEnter year of birth you wish to filter for: ").lower()
-    pass
+    birthString = pr.filterPrompt("Birth")
+    for key, value in data.items():
+        if (key != "0" and (birthString == value["Birth"][-4:])):
+            print(f"-----Employee Number {key}-----\n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
+            entryFound = True
 
-
-
-
-
-
-
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
 
 
 def filterByEmploymentDate():
+    entryFound = False
     data = initialize()
-    empDateString = pr.start_year_filter()
+    empDateString = pr.filterPrompt("Employment Date")
     for key, value in data.items():
         if (key != "0" and ((str(empDateString) in value["Employment Date"]))):
             print(f"-----Employee Number {key}-----\n")
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
+            entryFound = True
 
-
-
-
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
 
 
 def filterByDepartment():
+    entryFound = False
     data = initialize()
-    departmentString = input(
-        "\nEnter department you wish to filter for: ").lower()
+    departmentString = pr.filterPrompt("Department").lower()
     for key, value in data.items():
         if (key != "0" and departmentString in value["Department"].lower()):
             print(f"-----Employee Number {key}-----\n")
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
+            entryFound = True
 
-
-
-
-
-
-
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
 
 
 def filterBySalary():
+    entryFound = False
     data = initialize()
-    minSalString = input("\nEnter minimum salary you wish to filter for: ").lower()
-    maxSalString = input("\nEnter maximum salary you wish to filter for: ").lower()
-    pass
+    minSalary = int(pr.filterPrompt("Min Salary"))
+    maxSalary = int(pr.filterPrompt("Max Salary"))
+    for key, value in data.items():
+        if (key != "0" and ((minSalary <= int(value["Salary"])) and (maxSalary >= int(value["Salary"])))):
+            print(f"Employee Number {key}: \n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
+            entryFound = True
 
+    if not entryFound:
+        print("\nNo entries matching filter settings found!")
