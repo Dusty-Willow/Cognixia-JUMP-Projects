@@ -1,4 +1,9 @@
-class EmployeeNotFound(Exception):
+class EmployeeNotFound():
     
-    def printError():
-        print("This employee does not exist.")
+    def __init__(self) -> None:
+        print("\nThis employee does not exist.")
+
+class FileNotFound():
+    
+    def __init__(self) -> None:
+        print("\nThe file employees.json does not exist.")

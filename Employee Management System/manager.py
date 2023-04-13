@@ -3,9 +3,6 @@ import employee as emp
 import _prompts as pr
 import exceptions as exc
 
-employees = []
-objectList = []
-employeeIdPlaceholder = None
 
 # Methods used for fetching and then displaying list of employees from employees.json
 def displayEmployeeList():
@@ -13,17 +10,15 @@ def displayEmployeeList():
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
+    except:
+        exc.FileNotFound()
 
         for key, value in data.items():
             if (key != "0"):
                 print(f"-----Employee Number {key}-----\n")
                 currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
                 currentEmployee.toString()
-    except:
-        print("This file doesn't exist.")
 
-    # listEmployees()
-# Methods used for fetching and then displaying list of employees from employees.json
 
 def addEmployee():   #module adding a new employee record to the json file
     first_name = pr.get_first_name()
@@ -49,31 +44,38 @@ def addEmployee():   #module adding a new employee record to the json file
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
-        data[emp_id] = emp_info
+    except:
+        exc.FileNotFound()
 
+    data[emp_id] = emp_info
+    
+    try:
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
-        # printDict()
     except:
-        print("This file doesn't exist.")
+        exc.FileNotFound()
 
 def generateEmail(first_name, last_name, dob, emp_id):
     email = f"{first_name}.{last_name}{dob[-2:]}{emp_id}@cognixia.com"
     return email
 
 def generateId():
-    global employeeIdPlaceholder
+    employeeIdPlaceholder = None
 
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
-        employeeIdPlaceholder = data["0"]
-        data["0"] = employeeIdPlaceholder + 1
+    except:
+        exc.FileNotFound()
 
+    employeeIdPlaceholder = data["0"]
+    data["0"] = employeeIdPlaceholder + 1
+
+    try:
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        print("This file doesn't exist.")
+        exc.FileNotFound()
 
     return employeeIdPlaceholder + 1
 
@@ -82,39 +84,48 @@ def updateEmployeeAttribute(emp_id, attribute, value):
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
+    except:
+        exc.FileNotFound()
 
         data[str(emp_id)][attribute] =  value
 
+    try:
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        print("This file doesn't exist.")
+        exc.FileNotFound()
 
 def updateEmail(emp_id):
     try:
         with open('employees.json', 'rt') as file:
             data = json.load(file)
+    except:
+        exc.FileNotFound()
 
         data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
 
+    try:
         with open('employees.json', 'w') as file:
             json.dump(data, file, indent=4)
     except:
-        print("This file doesn't exist.")
+        exc.FileNotFound()
 
 def updateEmployeeData():
     updateEmployee = True
     employeePos = None
     employeeID = input("Please enter the Employee Id of the Employee you wish to update: ")
-    with open('employees.json', 'rt') as file:
-            data = json.load(file)
+    try:
+        with open('employees.json', 'rt') as file:
+                data = json.load(file)
+    except:
+        exc.FileNotFound()
     employeeFound = False
     for key, value in data.items():
         if (employeeID == key and employeeID != "0"):
             employeeFound = True
 
     if (employeeFound == False):
-        print("\nThis Employee does not exist in the database.")
+        exc.EmployeeNotFound()
         updateEmployee = False
 
     while updateEmployee:
@@ -128,7 +139,7 @@ def updateEmployeeData():
                 updateEmployeeAttribute(employeeID, "Last Name", input("Enter new Last Name: "))
                 updateEmail(employeeID)
             case "Age":
-                updateEmployeeAttribute(employeeID, "Age", input("Enter new Age: "))
+                updateEmployeeAttribute(employeeID, "Age", int(input("Enter new Age: ")))
             case "Birth":
                 updateEmployeeAttribute(employeeID, "Birth", input("Enter new Birth Date: "))
                 updateEmail(employeeID)
