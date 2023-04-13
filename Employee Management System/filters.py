@@ -21,10 +21,21 @@ def filterByName():
             currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
             currentEmployee.toString()
 
+
 def filterByAge():
     data = initialize()
-    ageString = input("\nEnter age you wish to filter for: ").lower()
-    pass
+    while True:
+        age = input("\nEnter age you wish to filter for: ")
+        if age.isdigit() and int(age) >= 0:
+            age = int(age)
+            break
+        else:
+            print("Please enter a number.")
+    for key, value in data.items():
+        if (key != "0" and value["Age"] == age):
+            print(f"-----Employee Number {key}-----\n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
 
 
 
@@ -50,6 +61,7 @@ def filterByBirth():
 
 def filterByEmploymentDate():
     data = initialize()
+<<<<<<< HEAD
     empDateString = pr.start_year_filter()
     for key, value in data.items():
         if (key != "0" and ((str(empDateString) in value["Employment Date"]))):
@@ -61,12 +73,21 @@ def filterByEmploymentDate():
 
 
 
+=======
+    empDateString = input("\nEnter year of employment you wish to filter for: ").lower()
+    pass
+>>>>>>> 88be3508546788a72df03059ee1353f82f623d26
 
 
 def filterByDepartment():
     data = initialize()
-    depString = input("\nEnter department you wish to filter for: ").lower()
-    pass
+    departmentString = input(
+        "\nEnter department you wish to filter for: ").lower()
+    for key, value in data.items():
+        if (key != "0" and departmentString in value["Department"].lower()):
+            print(f"-----Employee Number {key}-----\n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
 
 
 
@@ -81,3 +102,4 @@ def filterBySalary():
     minSalString = input("\nEnter minimum salary you wish to filter for: ").lower()
     maxSalString = input("\nEnter maximum salary you wish to filter for: ").lower()
     pass
+

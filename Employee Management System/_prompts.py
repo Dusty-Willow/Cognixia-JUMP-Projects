@@ -7,7 +7,7 @@ def get_first_name():
             else:
                 print("Error: Name must only use characters between A-Z and be at least 3 characters.")
         except Exception:
-            print("Error: Name must only use characters between A-Z and be at least 3 characters.")
+            print("Error: Undefined Error.")
 
 
 def get_last_name():
@@ -20,7 +20,7 @@ def get_last_name():
                 print(
                     "Error: Name must only include characters between A-Z and be at least 3 characters long.")
         except Exception:
-            print("Error: Name must only include characters between A-Z and be at least 3 characters long.")
+            print("Error: Undefined Error.")
 
 
 def get_age():
@@ -44,7 +44,7 @@ def get_dob():
             else:
                 print("Error: Date must be digits in DD-MM-YYY format.")
         except Exception:
-            print("Error: Date must be digits in DD-MM-YYY format.")
+            print("Error: Undefined Error.")
 
 
 def get_emp_date():
@@ -57,7 +57,7 @@ def get_emp_date():
             else:
                 print("Error: Date must be digits in DD-MM-YYY format.")
         except Exception:
-            print("Error: Date must be digits in DD-MM-YYY format.")
+            print("Error: Undefined Error.")
 
 
 def get_department():
@@ -70,7 +70,7 @@ def get_department():
                 print(
                     "Error: Department name must only include characters between A-Z and be at least 3 characters long.")
         except Exception:
-            print("Error: Department name must only include characters between A-Z and be at least 3 characters long.")
+            print("Error: Undefined Error.")
 
 
 def get_salary():
