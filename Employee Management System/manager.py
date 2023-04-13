@@ -13,11 +13,11 @@ def displayEmployeeList():
     except:
         exc.FileNotFound()
 
-        for key, value in data.items():
-            if (key != "0"):
-                print(f"-----Employee Number {key}-----\n")
-                currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
-                currentEmployee.toString()
+    for key, value in data.items():
+        if (key != "0"):
+            print(f"-----Employee Number {key}-----\n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
 
 
 def addEmployee():   #module adding a new employee record to the json file
@@ -87,7 +87,7 @@ def updateEmployeeAttribute(emp_id, attribute, value):
     except:
         exc.FileNotFound()
 
-        data[str(emp_id)][attribute] =  value
+    data[str(emp_id)][attribute] =  value
 
     try:
         with open('employees.json', 'w') as file:
@@ -102,7 +102,7 @@ def updateEmail(emp_id):
     except:
         exc.FileNotFound()
 
-        data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
+    data[str(emp_id)]["Email"] = generateEmail(data[str(emp_id)]["First Name"], data[str(emp_id)]["Last Name"], data[str(emp_id)]["Birth"], data[str(emp_id)]["Employee ID"])
 
     try:
         with open('employees.json', 'w') as file:
@@ -148,7 +148,7 @@ def updateEmployeeData():
             case "Department":
                 updateEmployeeAttribute(employeeID, "Department", pr.get_department())
             case "Salary":
-                updateEmployeeAttribute(employeeID, "Salary", pr.get_salary())
+                updateEmployeeAttribute(employeeID, "Salary", str(pr.get_salary()))
             case _:
                 print("Invalid employee field choice. Please choose an appropriate field to update.")
 
