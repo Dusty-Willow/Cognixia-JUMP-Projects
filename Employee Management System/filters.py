@@ -4,7 +4,7 @@ import employee as emp
 
 def initialize():
     try:
-        with open('employees.json', 'rt') as file:
+        with open('Employee Management System/employees.json', 'rt') as file:
             data = json.load(file)
     except:
         raise exc.FileNotFound()
@@ -37,7 +37,14 @@ def filterByAge():
 def filterByBirth():
     data = initialize()
     birthString = input("\nEnter year of birth you wish to filter for: ").lower()
-    pass
+    for key, value in data.items():
+        if (key != "0" and (birthString in value["Birth"][-4:])):
+            print(value)
+            print(f"-----Employee Number {key}-----\n")
+            currentEmployee = emp.Employee(value["First Name"], value["Last Name"], value["Age"], value["Birth"], value["Employee ID"], value["Employment Date"], value["Department"], value["Salary"], value["Email"])
+            currentEmployee.toString()
+
+
 
 
 
